@@ -18,6 +18,12 @@
   </div>
 
   <div class="form-group">
+    <%= label f, :assignee, class: "control-label" %>
+    <%= select f, :user_id, [nil | @users] %>
+    <%= error_tag f, :assignee %>
+  </div>
+
+  <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>
   </div>
 <% end %>
