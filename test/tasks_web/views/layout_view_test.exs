@@ -1,3 +1,3 @@
-defmodule TasksWeb.LayoutViewTest do
-  use TasksWeb.ConnCase, async: true
+defmodule TaskTrackerWeb.LayoutViewTest do
+  use TaskTrackerWeb.ConnCase, async: true
 end

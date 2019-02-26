@@ -1,6 +1,6 @@
-defmodule Tasks do
+defmodule TaskTracker do
   @moduledoc """
-  Tasks keeps the contexts that define your domain
+  TaskTracker keeps the contexts that define your domain
   and business logic.
 
   Contexts are also responsible for managing your data, regardless

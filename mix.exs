@@ -1,9 +1,9 @@
-defmodule Tasks.Mixfile do
+defmodule TaskTracker.Mixfile do
   use Mix.Project
 
   def project do
     [
-      app: :tasks,
+      app: :task_tracker,
       version: "0.0.1",
       elixir: "~> 1.4",
       elixirc_paths: elixirc_paths(Mix.env),
@@ -19,7 +19,7 @@ defmodule Tasks.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Tasks.Application, []},
+      mod: {TaskTracker.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end
@@ -46,7 +46,7 @@ defmodule Tasks.Mixfile do
     ]
   end
 
-  # Aliases are shortcuts or tasks specific to the current project.
+  # Aliases are shortcuts or task_tracker specific to the current project.
   # For example, to create, migrate and run the seeds file at once:
   #
   #     $ mix ecto.setup

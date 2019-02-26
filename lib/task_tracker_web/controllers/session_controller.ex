@@ -1,11 +1,11 @@
-defmodule TasksWeb.SessionController do
-  use TasksWeb, :controller
+defmodule TaskTrackerWeb.SessionController do
+  use TaskTrackerWeb, :controller
 
   # Referenced from lecture code
   # https://github.com/NatTuck/husky_shop/compare/2-deploy...3-users#diff-501b6001d573b9bc1ffba704a1bdc907
 
   def create(conn, %{"username" => username}) do
-    user = Tasks.Users.get_user_by_username(username)
+    user = TaskTracker.Users.get_user_by_username(username)
 
     if user do
       conn

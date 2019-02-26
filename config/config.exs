@@ -5,7 +5,7 @@
 # is restricted to this project.
 use Mix.Config
 
-path = Path.expand("~/.config/tasks.secret")
+path = Path.expand("~/.config/task_tracker.secret")
 unless File.exists?(path) do
   secret = Base.encode16(:crypto.strong_rand_bytes(32))
   File.write!(path, secret)
@@ -13,15 +13,15 @@ end
 secret = File.read!(path)
 
 # General application configuration
-config :tasks,
-       ecto_repos: [Tasks.Repo]
+config :task_tracker,
+       ecto_repos: [TaskTracker.Repo]
 
 # Configures the endpoint
-config :tasks, TasksWeb.Endpoint,
+config :task_tracker, TaskTrackerWeb.Endpoint,
        url: [host: "localhost"],
        secret_key_base: secret,
-       render_errors: [view: TasksWeb.ErrorView, accepts: ~w(html json)],
-       pubsub: [name: Tasks.PubSub,
+       render_errors: [view: TaskTrackerWeb.ErrorView, accepts: ~w(html json)],
+       pubsub: [name: TaskTracker.PubSub,
          adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger

@@ -1,14 +1,14 @@
-defmodule TasksWeb.Endpoint do
-  use Phoenix.Endpoint, otp_app: :tasks
+defmodule TaskTrackerWeb.Endpoint do
+  use Phoenix.Endpoint, otp_app: :task_tracker
 
-  socket "/socket", TasksWeb.UserSocket
+  socket "/socket", TaskTrackerWeb.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
   # You should set gzip to true if you are running phoenix.digest
   # when deploying your static files in production.
   plug Plug.Static,
-    at: "/", from: :tasks, gzip: false,
+    at: "/", from: :task_tracker, gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
@@ -34,10 +34,10 @@ defmodule TasksWeb.Endpoint do
   # Set :encryption_salt if you would also like to encrypt it.
   plug Plug.Session,
     store: :cookie,
-    key: "_tasks_key",
+    key: "_task_tracker_key",
     signing_salt: "bW9VWC3P"
 
-  plug TasksWeb.Router
+  plug TaskTrackerWeb.Router
 
   @doc """
   Callback invoked for dynamically configuring the endpoint.

@@ -1,4 +1,4 @@
-defmodule Tasks.Users.User do
+defmodule TaskTracker.Users.User do
   use Ecto.Schema
   import Ecto.Changeset
 

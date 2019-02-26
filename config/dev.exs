@@ -6,7 +6,7 @@ use Mix.Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
-config :tasks, TasksWeb.Endpoint,
+config :task_tracker, TaskTrackerWeb.Endpoint,
        http: [port: 4000],
        debug_errors: true,
        code_reloader: true,
@@ -39,13 +39,13 @@ config :tasks, TasksWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :tasks, TasksWeb.Endpoint,
+config :task_tracker, TaskTrackerWeb.Endpoint,
        live_reload: [
          patterns: [
            ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
            ~r{priv/gettext/.*(po)$},
-           ~r{lib/tasks_web/views/.*(ex)$},
-           ~r{lib/tasks_web/templates/.*(eex)$}
+           ~r{lib/task_tracker_web/views/.*(ex)$},
+           ~r{lib/task_tracker_web/templates/.*(eex)$}
          ]
        ]
 
@@ -60,7 +60,7 @@ config :phoenix, :stacktrace_depth, 20
 config :phoenix, :plug_init_mode, :runtime
 
 get_secret = fn name ->
-  base = Path.expand("~/.config/tasks")
+  base = Path.expand("~/.config/task_tracker")
   File.mkdir_p!(base)
   path = Path.join(base, name)
   unless File.exists?(path) do
@@ -71,9 +71,9 @@ get_secret = fn name ->
 end
 
 # Configure your database
-config :tasks, Tasks.Repo,
-       username: "tasks",
+config :task_tracker, TaskTracker.Repo,
+       username: "task_tracker",
        password: get_secret.("db_pass"),
-       database: "tasks_dev",
+       database: "task_tracker_dev",
        hostname: "localhost",
        pool_size: 10

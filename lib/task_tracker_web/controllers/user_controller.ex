@@ -1,8 +1,8 @@
-defmodule TasksWeb.UserController do
-  use TasksWeb, :controller
+defmodule TaskTrackerWeb.UserController do
+  use TaskTrackerWeb, :controller
 
-  alias Tasks.Users
-  alias Tasks.Users.User
+  alias TaskTracker.Users
+  alias TaskTracker.Users.User
 
   def index(conn, _params) do
     users = Users.list_users()

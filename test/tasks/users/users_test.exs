@@ -1,10 +1,10 @@
-defmodule Tasks.UsersTest do
-  use Tasks.DataCase
+defmodule TaskTracker.UsersTest do
+  use TaskTracker.DataCase
 
-  alias Tasks.Users
+  alias TaskTracker.Users
 
   describe "users" do
-    alias Tasks.Users.User
+    alias TaskTracker.Users.User
 
     @valid_attrs %{admin: true, username: "some username"}
     @update_attrs %{admin: false, username: "some updated username"}

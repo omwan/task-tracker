@@ -23,7 +23,7 @@ use Mix.Releases.Config,
 # and environment configuration is called a profile
 
 get_secret = fn name ->
-  base = Path.expand("~/.config/tasks")
+  base = Path.expand("~/.config/task_tracker")
   File.mkdir_p!(base)
   path = Path.join(base, name)
   unless File.exists?(path) do
@@ -56,8 +56,8 @@ end
 # when running `mix release`, the first release in the file
 # will be used by default
 
-release :tasks do
-  set version: current_version(:tasks)
+release :task_tracker do
+  set version: current_version(:task_tracker)
   set applications: [
         :runtime_tools
       ]

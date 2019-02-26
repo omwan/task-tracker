@@ -1,7 +1,7 @@
-defmodule TasksWeb.UserControllerTest do
-  use TasksWeb.ConnCase
+defmodule TaskTrackerWeb.UserControllerTest do
+  use TaskTrackerWeb.ConnCase
 
-  alias Tasks.Users
+  alias TaskTracker.Users
 
   @create_attrs %{admin: true, username: "some username"}
   @update_attrs %{admin: false, username: "some updated username"}

@@ -1,4 +1,4 @@
-defmodule TasksWeb.Plugs.FetchSession do
+defmodule TaskTrackerWeb.Plugs.FetchSession do
   import Plug.Conn
 
   # Referenced from lecture code
@@ -9,7 +9,7 @@ defmodule TasksWeb.Plugs.FetchSession do
   end
 
   def call(conn, _args) do
-    user = Tasks.Users.get_user(get_session(conn, :user_id) || -1)
+    user = TaskTracker.Users.get_user(get_session(conn, :user_id) || -1)
     if user do
       assign(conn, :current_user, user)
     else
