@@ -6,7 +6,7 @@ defmodule TaskTracker.Tasks.Task do
   schema "tasks" do
     field :name, :string
     field :time_spent, :integer
-    field :assignee_id, :id
+    belongs_to :user, TaskTracker.Users.User
 
     timestamps()
   end
@@ -14,7 +14,7 @@ defmodule TaskTracker.Tasks.Task do
   @doc false
   def changeset(task, attrs) do
     task
-    |> cast(attrs, [:name, :time_spent, :assignee_id])
+    |> cast(attrs, [:name, :time_spent, :user_id])
     |> validate_required([:name, :time_spent])
   end
 end

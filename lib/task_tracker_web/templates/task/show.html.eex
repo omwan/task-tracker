@@ -2,15 +2,24 @@
 
 <ul>
 
-  <li>
-    <strong>Name:</strong>
-    <%= @task.name %>
-  </li>
+    <li>
+        <strong>Name:</strong>
+        <%= @task.name %>
+    </li>
 
-  <li>
-    <strong>Time spent:</strong>
-    <%= @task.time_spent %>
-  </li>
+    <li>
+        <strong>Time spent:</strong>
+        <%= @task.time_spent %>
+    </li>
+
+    <li>
+        <strong>Assignee:</strong>
+        <%= if @task.user do %>
+            <%= @task.user.username %>
+        <% else %>
+            No user assigned
+        <% end %>
+    </li>
 
 </ul>
 

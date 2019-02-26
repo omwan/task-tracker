@@ -26,18 +26,18 @@ defmodule TaskTrackerWeb.TaskController do
   end
 
   def show(conn, %{"id" => id}) do
-    task = Tasks.get_task!(id)
+    task = Tasks.get_task(id)
     render(conn, "show.html", task: task)
   end
 
   def edit(conn, %{"id" => id}) do
-    task = Tasks.get_task!(id)
+    task = Tasks.get_task(id)
     changeset = Tasks.change_task(task)
     render(conn, "edit.html", task: task, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "task" => task_params}) do
-    task = Tasks.get_task!(id)
+    task = Tasks.get_task(id)
 
     case Tasks.update_task(task, task_params) do
       {:ok, task} ->
@@ -50,7 +50,7 @@ defmodule TaskTrackerWeb.TaskController do
   end
 
   def delete(conn, %{"id" => id}) do
-    task = Tasks.get_task!(id)
+    task = Tasks.get_task(id)
     {:ok, _task} = Tasks.delete_task(task)
 
     conn
