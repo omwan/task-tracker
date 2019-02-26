@@ -6,8 +6,7 @@ defmodule TaskTrackerWeb.TaskController do
   alias TaskTracker.Users
 
   def index(conn, _params) do
-    tasks = Tasks.list_tasks()
-    render(conn, "index.html", tasks: tasks)
+    render(conn, "index.html", tasks: Tasks.list_tasks())
   end
 
   def new(conn, _params) do

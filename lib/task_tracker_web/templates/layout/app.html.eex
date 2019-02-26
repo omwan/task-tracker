@@ -27,12 +27,15 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="/">Home</a>
                 </li>
+                <%= if @current_user do %>
                 <li class="nav-item">
-                    <a class="nav-link" href="/users">Users</a>
+                    <%= link "My account", to: user_path(@conn, :show, @current_user), class: "nav-link" %>
                 </li>
+                <% else %>
                 <li class="nav-item">
-                    <a class="nav-link" href="/tasks">Tasks</a>
+                    <%= link "Create account", to: user_path(@conn, :new), class: "nav-link" %>
                 </li>
+                <% end %>
             </ul>
         </div>
         <div class="col-4">

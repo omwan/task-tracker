@@ -22,6 +22,12 @@ defmodule TaskTracker.Tasks do
              preload: :user
   end
 
+  def list_tasks_by_user(id) do
+    Repo.all from t in Task,
+      where: t.user_id == ^id,
+      preload: :user
+  end
+
   @doc """
   Gets a single task.
 
