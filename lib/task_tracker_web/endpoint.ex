@@ -1,7 +1,8 @@
 defmodule TaskTrackerWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :task_tracker
 
-  socket "/socket", TaskTrackerWeb.UserSocket
+  socket "/socket", TaskTrackerWeb.UserSocket,
+         websocket: true
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -24,7 +25,7 @@ defmodule TaskTrackerWeb.Endpoint do
   plug Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json],
     pass: ["*/*"],
-    json_decoder: Poison
+    json_decoder: Jason
 
   plug Plug.MethodOverride
   plug Plug.Head
