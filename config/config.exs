@@ -5,22 +5,34 @@
 # is restricted to this project.
 use Mix.Config
 
+path = Path.expand("~/.config/tasks.secret")
+unless File.exists?(path) do
+  secret = Base.encode16(:crypto.strong_rand_bytes(32))
+  File.write!(path, secret)
+end
+secret = File.read!(path)
+
 # General application configuration
 config :tasks,
-  ecto_repos: [Tasks.Repo]
+       ecto_repos: [Tasks.Repo]
 
 # Configures the endpoint
 config :tasks, TasksWeb.Endpoint,
-  url: [host: "localhost"],
-  secret_key_base: "woXfJ8u4kZVuFZBD9D2sURE7Q2drZJ4+vMhbmenQ+dzzoCw2vMmmwPcEvsxwZUkW",
-  render_errors: [view: TasksWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Tasks.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+       url: [host: "localhost"],
+       secret_key_base: secret,
+       render_errors: [view: TasksWeb.ErrorView, accepts: ~w(html json)],
+       pubsub: [name: Tasks.PubSub,
+         adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
-  format: "$time $metadata[$level] $message\n",
-  metadata: [:user_id]
+       format: "$time $metadata[$level] $message\n",
+       metadata: [:request_id]
+
+# Use Jason for JSON parsing in Phoenix and Ecto
+config :phoenix, :json_library, Jason
+config :ecto, :json_library, Jason
+
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

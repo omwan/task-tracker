@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello Showdown!</title>
+    <title>Hello Task Manager!</title>
 
     <link rel="stylesheet" href='<%= static_path(@conn, "/css/app.css") %>'>
 
