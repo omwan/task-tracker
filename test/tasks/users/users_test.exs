@@ -6,9 +6,9 @@ defmodule Tasks.UsersTest do
   describe "users" do
     alias Tasks.Users.User
 
-    @valid_attrs %{username: "some username"}
-    @update_attrs %{username: "some updated username"}
-    @invalid_attrs %{username: nil}
+    @valid_attrs %{admin: true, username: "some username"}
+    @update_attrs %{admin: false, username: "some updated username"}
+    @invalid_attrs %{admin: nil, username: nil}
 
     def user_fixture(attrs \\ %{}) do
       {:ok, user} =
@@ -31,6 +31,7 @@ defmodule Tasks.UsersTest do
 
     test "create_user/1 with valid data creates a user" do
       assert {:ok, %User{} = user} = Users.create_user(@valid_attrs)
+      assert user.admin == true
       assert user.username == "some username"
     end
 
@@ -42,6 +43,7 @@ defmodule Tasks.UsersTest do
       user = user_fixture()
       assert {:ok, user} = Users.update_user(user, @update_attrs)
       assert %User{} = user
+      assert user.admin == false
       assert user.username == "some updated username"
     end
 
