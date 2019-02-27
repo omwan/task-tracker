@@ -1,10 +1,15 @@
-<h2>Show Task</h2>
+<h2>Task Details</h2>
 
 <ul>
 
     <li>
         <strong>Name:</strong>
         <%= @task.name %>
+    </li>
+
+    <li>
+        <strong>Description:</strong>
+        <%= @task.description %>
     </li>
 
     <li>
@@ -28,5 +33,5 @@
 
 </ul>
 
-<span><%= link "Edit", to: task_path(@conn, :edit, @task) %></span>
-<span><%= link "Back", to: page_path(@conn, :index) %></span>
+<span><%= link "Edit", to: task_path(@conn, :edit, @task), class: "btn btn-primary"%></span>
+<span><%= link "Back", to: page_path(@conn, :index), class: "btn btn-default" %></span>

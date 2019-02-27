@@ -5,11 +5,16 @@
 </div>
 <% end %>
 
-<div class="container">
+<div class="container form-container">
     <div class="form-group row">
         <%= label f, :name, class: "control-label col-form-label col-md-2" %>
         <%= text_input f, :name, class: "form-control col-md-4" %>
         <%= error_tag f, :name %>
+    </div>
+    <div class="form-group row">
+        <%= label f, :description, class: "control-label col-form-label col-md-2" %>
+        <%= textarea f, :description, class: "form-control col-md-4" %>
+        <%= error_tag f, :description %>
     </div>
 
     <div class="form-group row">
@@ -20,7 +25,7 @@
 
     <div class="form-group row">
         <%= label f, :time_spent, class: "control-label col-form-label col-md-2" %>
-        <%= number_input f, :time_spent, class: "form-control col-md-4" %>
+        <%= number_input f, :time_spent, class: "form-control col-md-4", step: 15, min: 0 %>
         <%= error_tag f, :time_spent %>
     </div>
 
@@ -30,8 +35,9 @@
         <%= error_tag f, :assignee %>
     </div>
 
-    <div class="form-group row">
+    <div class="form-group row submit-buttons">
         <%= submit "Submit", class: "btn btn-primary" %>
+        <%= link "Back", to: page_path(@conn, :index), class: "btn btn-default" %>
     </div>
 </div>
 <% end %>

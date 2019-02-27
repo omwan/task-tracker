@@ -5,6 +5,7 @@ defmodule TaskTracker.Tasks.Task do
 
   schema "tasks" do
     field :name, :string
+    field :description, :string
     field :complete, :boolean
     field :time_spent, :integer
     belongs_to :user, TaskTracker.Users.User
@@ -31,7 +32,7 @@ defmodule TaskTracker.Tasks.Task do
   @doc false
   def changeset(task, attrs) do
     task
-    |> cast(attrs, [:name, :time_spent, :complete, :user_id])
+    |> cast(attrs, [:name, :description, :time_spent, :complete, :user_id])
     |> validate_required([:name, :complete, :time_spent])
     |> validate_number(:time_spent, greater_than_or_equal_to: 0)
     |> validate_increment(:time_spent, 15)

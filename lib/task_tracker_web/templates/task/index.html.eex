@@ -1,11 +1,10 @@
-<table class="table table-striped">
+<table class="table table-striped show-tasks">
     <thead>
     <tr>
         <th>Name</th>
         <th>Complete</th>
         <th>Time spent</th>
         <th>Assignee</th>
-
         <th></th>
     </tr>
     </thead>
@@ -16,13 +15,13 @@
         <td><%= task.complete %></td>
         <td><%= task.time_spent %></td>
         <%= if task.user do %>
-            <td><%= task.user.username %></td>
+        <td><%= task.user.username %></td>
         <% else %>
-            <td>No user assigned</td>
+        <td>No user assigned</td>
         <% end %>
 
         <td class="text-right">
-            <span><%= link "Show", to: task_path(@conn, :show, task), class: "btn btn-default btn-xs" %></span>
+            <span><%= link "Details", to: task_path(@conn, :show, task), class: "btn btn-default btn-xs" %></span>
             <span><%= link "Edit", to: task_path(@conn, :edit, task), class: "btn btn-default btn-xs" %></span>
             <span><%= link "Delete", to: task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
         </td>
@@ -31,4 +30,4 @@
     </tbody>
 </table>
 
-<span><%= link "New Task", to: task_path(@conn, :new) %></span>
+<span><%= link "New Task", to: task_path(@conn, :new), class: "btn btn-primary" %></span>

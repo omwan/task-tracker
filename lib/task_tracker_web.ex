@@ -1,7 +1,5 @@
 defmodule TaskTrackerWeb do
 
-  alias TaskTrackerWeb.Router.Helpers, as: Routes
-
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, views, channels and so on.

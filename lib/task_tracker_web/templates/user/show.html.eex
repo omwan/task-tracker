@@ -1,4 +1,4 @@
-<h2>Show User</h2>
+<h2>Account Details</h2>
 
 <ul>
 
@@ -14,5 +14,5 @@
 
 </ul>
 
-<span><%= link "Edit", to: user_path(@conn, :edit, @user) %></span>
-<span><%= link "Back", to: page_path(@conn, :index) %></span>
+<span><%= link "Edit", to: user_path(@conn, :edit, @user), class: "btn btn-primary" %></span>
+<span><%= link "Back", to: page_path(@conn, :index), class: "btn btn-default" %></span>
