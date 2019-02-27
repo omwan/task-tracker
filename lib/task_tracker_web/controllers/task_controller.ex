@@ -36,7 +36,7 @@ defmodule TaskTrackerWeb.TaskController do
     task = Tasks.get_task(id)
     changeset = Tasks.change_task(task)
     users = Users.list_users
-      |> Enum.map(&{"#{&1.username}", &1.id})
+            |> Enum.map(&{"#{&1.username}", &1.id})
     render(conn, "edit.html", task: task, users: users, changeset: changeset)
   end
 
@@ -49,7 +49,9 @@ defmodule TaskTrackerWeb.TaskController do
         |> put_flash(:info, "Task updated successfully.")
         |> redirect(to: task_path(conn, :show, task))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", task: task, changeset: changeset)
+        users = Users.list_users
+                |> Enum.map(&{"#{&1.username}", &1.id})
+        render(conn, "edit.html", task: task, users: users, changeset: changeset)
     end
   end
 

@@ -8,6 +8,11 @@
     </li>
 
     <li>
+        <strong>Complete:</strong>
+        <%= @task.complete %>
+    </li>
+
+    <li>
         <strong>Time spent:</strong>
         <%= @task.time_spent %>
     </li>

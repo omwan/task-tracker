@@ -2,6 +2,7 @@
     <thead>
     <tr>
         <th>Name</th>
+        <th>Complete</th>
         <th>Time spent</th>
         <th>Assignee</th>
 
@@ -12,6 +13,7 @@
     <%= for task <- @tasks do %>
     <tr>
         <td><%= task.name %></td>
+        <td><%= task.complete %></td>
         <td><%= task.time_spent %></td>
         <%= if task.user do %>
             <td><%= task.user.username %></td>
