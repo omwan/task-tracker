@@ -32,6 +32,8 @@ defmodule TaskTrackerWeb.TaskController do
     render(conn, "show.html", task: task)
   end
 
+  # referenced from
+  # https://til.hashrocket.com/posts/vikw0jg3hh-phoenix-select-form-helper
   def edit(conn, %{"id" => id}) do
     task = Tasks.get_task(id)
     changeset = Tasks.change_task(task)

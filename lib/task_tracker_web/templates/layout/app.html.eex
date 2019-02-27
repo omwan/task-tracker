@@ -66,7 +66,11 @@
         </div>
     </div>
 
-    <%= render @view_module, @view_template, assigns %>
+    <div class="row app-view">
+        <div class="col-md-12">
+            <%= render @view_module, @view_template, assigns %>
+        </div>
+    </div>
 </div>
 
 <script src='<%= static_path(@conn, "/js/app.js") %>'></script>

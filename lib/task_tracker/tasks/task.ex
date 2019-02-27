@@ -12,6 +12,8 @@ defmodule TaskTracker.Tasks.Task do
     timestamps()
   end
 
+  # referenced from
+  # https://medium.com/@QuantLayer/more-custom-validations-for-ecto-changesets-17f3641be2a0
   defp validate_increment(changeset, field, increment) do
     case changeset.valid? do
       true ->
