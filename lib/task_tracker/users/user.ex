@@ -7,6 +7,8 @@ defmodule TaskTracker.Users.User do
     field :admin, :boolean, default: false
     field :username, :string
     has_many :tasks, TaskTracker.Tasks.Task
+    belongs_to :manager, TaskTracker.Users.User
+    has_many :subordinates, TaskTracker.Users.User
 
     timestamps()
   end

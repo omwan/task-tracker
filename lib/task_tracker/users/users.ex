@@ -37,10 +37,21 @@ defmodule TaskTracker.Users do
   """
   def get_user!(id), do: Repo.get!(User, id)
 
-  def get_user(id), do: Repo.get(User, id)
+  def get_user(id) do
+    Repo.one from u in User,
+             where: u.id == ^id,
+             preload: :manager
+  end
 
   def get_user_by_username(username) do
-    Repo.get_by(User, username: username)
+    Repo.one from u in User,
+             where: u.username == ^username,
+             preload: :manager
+  end
+
+  def get_subordinates(id) do
+    Repo.all from u in User,
+      where: u.manager_id == ^id
   end
 
 
