@@ -30,7 +30,11 @@
                 <%= if @current_user do %>
                 <li class="nav-item">
                     <%= link "My account", to: user_path(@conn, :show, @current_user), class: "nav-link" %>
+                <%= if @current_user.admin do %>
                 </li>
+                    <%= link "Task report", to: task_path(@conn, :index), class: "nav-link" %>
+                </li>
+                <% end %>
                 <% else %>
                 <li class="nav-item">
                     <%= link "Create account", to: user_path(@conn, :new), class: "nav-link" %>

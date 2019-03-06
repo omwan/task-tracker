@@ -1,8 +1,15 @@
 # task-tracker
 
-HW06 for CS 4550 Web Development
+HW06/HW07 for CS 4550 Web Development
 
-Design choices made:
+Design choices made (HW07):
+
+* Managers may only assign tasks to their direct underlings, not the underlings of their underlings
+* A user may only have one manager, a manager may have multiple underlings
+* Users are not required to have a manager
+* Only users with the "admin" flag set to "true" are considered managers and have underlings
+
+Design choices made (HW06):
 
 * If users are not logged in they can select the "create account" button in the navbar to create a new user. When they are logged in the navbar instead displays "My account" which is the show page for that user, from where they can edit their user details
 * No direct link to user index page (ie: page to list all users), although enforcing users only being able to see/edit their own account details is not implemented

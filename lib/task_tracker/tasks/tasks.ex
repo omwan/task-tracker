@@ -7,6 +7,7 @@ defmodule TaskTracker.Tasks do
   alias TaskTracker.Repo
 
   alias TaskTracker.Tasks.Task
+  alias TaskTracker.Users.User
 
   @doc """
   Returns the list of tasks.
@@ -24,8 +25,15 @@ defmodule TaskTracker.Tasks do
 
   def list_tasks_by_user(id) do
     Repo.all from t in Task,
-      where: t.user_id == ^id,
-      preload: :user
+             where: t.user_id == ^id,
+             preload: :user
+  end
+
+  def list_tasks_by_manager(id) do
+    Repo.all from t in Task,
+             join: u in User,
+             where: t.user_id == u.id and u.manager_id == ^id,
+             preload: :user
   end
 
   @doc """

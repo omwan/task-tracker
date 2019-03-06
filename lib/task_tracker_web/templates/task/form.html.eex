@@ -29,11 +29,13 @@
         <%= error_tag f, :time_spent %>
     </div>
 
+    <%= if length(@users) > 0 do %>
     <div class="form-group row">
         <%= label f, :assignee, class: "control-label col-form-label col-md-2" %>
         <%= select f, :user_id, [nil | @users], class: "col-md-4" %>
         <%= error_tag f, :assignee %>
     </div>
+    <% end %>
 
     <div class="form-group row submit-buttons">
         <%= submit "Submit", class: "btn btn-primary" %>
