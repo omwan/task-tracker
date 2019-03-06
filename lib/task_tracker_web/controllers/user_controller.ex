@@ -26,18 +26,18 @@ defmodule TaskTrackerWeb.UserController do
   end
 
   def show(conn, %{"id" => id}) do
-    user = Users.get_user!(id)
+    user = Users.get_user(id)
     render(conn, "show.html", user: user)
   end
 
   def edit(conn, %{"id" => id}) do
-    user = Users.get_user!(id)
+    user = Users.get_user(id)
     changeset = Users.change_user(user)
     render(conn, "edit.html", user: user, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
-    user = Users.get_user!(id)
+    user = Users.get_user(id)
 
     case Users.update_user(user, user_params) do
       {:ok, user} ->
@@ -50,7 +50,7 @@ defmodule TaskTrackerWeb.UserController do
   end
 
   def delete(conn, %{"id" => id}) do
-    user = Users.get_user!(id)
+    user = Users.get_user(id)
     {:ok, _user} = Users.delete_user(user)
 
     conn
