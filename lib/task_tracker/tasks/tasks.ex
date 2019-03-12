@@ -55,7 +55,7 @@ defmodule TaskTracker.Tasks do
   def get_task(id) do
     Repo.one from t in Task,
              where: t.id == ^id,
-             preload: :user
+             preload: [:user, :time_blocks]
   end
 
   @doc """

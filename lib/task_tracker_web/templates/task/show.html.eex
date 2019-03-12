@@ -1,32 +1,90 @@
 <h2>Task Details</h2>
 
-<ul>
+<div class="container">
 
-    <li>
-        <strong>Name:</strong>
-        <%= @task.name %>
-    </li>
+    <div class="row">
+        <div class="col-md-12">
+            <ul>
 
-    <li>
-        <strong>Description:</strong>
-        <%= @task.description %>
-    </li>
+                <li>
+                    <strong>Name:</strong>
+                    <%= @task.name %>
+                </li>
 
-    <li>
-        <strong>Complete:</strong>
-        <%= @task.complete %>
-    </li>
+                <li>
+                    <strong>Description:</strong>
+                    <%= @task.description %>
+                </li>
 
-    <li>
-        <strong>Assignee:</strong>
-        <%= if @task.user do %>
-            <%= @task.user.username %>
-        <% else %>
-            No user assigned
-        <% end %>
-    </li>
+                <li>
+                    <strong>Complete:</strong>
+                    <%= @task.complete %>
+                </li>
 
-</ul>
+                <li>
+                    <strong>Assignee:</strong>
+                    <%= if @task.user do %>
+                    <%= @task.user.username %>
+                    <% else %>
+                    No user assigned
+                    <% end %>
+                </li>
 
-<span><%= link "Edit", to: task_path(@conn, :edit, @task), class: "btn btn-primary"%></span>
-<span><%= link "Back", to: page_path(@conn, :index), class: "btn btn-default" %></span>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <p><b>Time blocks</b></p>
+
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Start</th>
+                    <th>Stop</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <%= for time_block <- @task.time_blocks do %>
+
+                <tr>
+                    <td><%= time_block.start %></td>
+                    <td><%= time_block.stop %></td>
+                    <td>
+                        <span>
+                            <button class="btn btn-default btn-xs">Save</button>
+                        </span>
+                        <span>
+                            <%= link "Delete", to: time_block_path(@conn, :delete, time_block), method: :delete,
+                            data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+                        </span>
+                    </td>
+                </tr>
+                <% end %>
+            </table>
+        </div>
+    </div>
+
+    <!--<div class="row">-->
+    <!--<div class="control-label col-form-label col-md-2">-->
+    <!--<label>Add new time block</label>-->
+    <!--</div>-->
+    <!--<div class="col-md-6">-->
+    <!--<button class="btn btn-primary"-->
+    <!--id="time-block-button"-->
+    <!--data-task-id="<%= @task.id %>">-->
+    <!--Start-->
+    <!--</button>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <div class="row">
+        <div class="col-md-12" style="margin-top:20px">
+            <span><%= link "Edit", to: task_path(@conn, :edit, @task), class: "btn btn-primary"%></span>
+            <span><%= link "Back", to: page_path(@conn, :index), class: "btn btn-default" %></span>
+        </div>
+    </div>
+
+</div><!--container-->
