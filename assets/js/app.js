@@ -29,6 +29,28 @@ $(function () {
 
     let timeBlockPath = "/ajax/time_block/";
 
+    let submitDisabled = function() {
+        return $("#new-start-date").val() === "" ||
+            $("#new-start-time").val() === "" ||
+            $("#new-stop-date").val() === "" ||
+            $("#new-stop-time").val() === "";
+    };
+
+    console.log(submitDisabled());
+    if (submitDisabled()) {
+        $(".new-time-block-button").prop("disabled", true);
+    }
+
+    $(".new-time-block").find("input").each(function() {
+        $(this).change(function() {
+            if (submitDisabled()) {
+                $(".new-time-block-button").prop("disabled", true);
+            } else {
+                $(".new-time-block-button").prop("disabled", false);
+            }
+        })
+    });
+
     let saveOnClick = function (event) {
         let timeBlockId = $(event.target).data("time-block-id");
         let timeBlock = {
@@ -77,6 +99,7 @@ $(function () {
         inputs.forEach(function (name) {
             $(name).val("");
         });
+        $(".new-time-block-button").prop("disabled", true);
     };
 
 

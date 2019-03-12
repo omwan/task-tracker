@@ -48,7 +48,7 @@
                 </thead>
                 <%= for time_block <- @task.time_blocks do %>
 
-                <tr class="time-block-row form-container">
+                <tr class="time-block-row form-container" data-time-block-id="<%= time_block.id %>">
                     <td class="form-group">
                         <input class="form-control" type="date"
                                value="<%= time_block.start_date %>"
@@ -110,7 +110,7 @@
 
     <div class="row">
         <div class="control-label col-form-label col-md-2">
-            <label>Add new time block</label>
+            <label>Start working</label>
         </div>
         <div class="col-md-2">
             <button class="btn btn-primary manual-time-block-button"
