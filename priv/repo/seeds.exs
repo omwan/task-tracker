@@ -63,12 +63,22 @@ Repo.insert!(
   }
 )
 
-{:ok, d1} = DateTime.from_unix(1_552_356_186)
-{:ok, d2} = DateTime.from_unix(1_552_356_372)
+Repo.insert!(
+  %TimeBlock{
+    start_date: elem(Date.new(2019, 03, 11), 1),
+    start_time: elem(Time.new(3, 05, 10), 1),
+    stop_date: elem(Date.new(2019, 03, 11), 1),
+    stop_time: elem(Time.new(3, 20, 10), 1),
+    task: t1
+  }
+)
 
-Repo.insert!(%TimeBlock{start: d1, stop: d2, task: t1})
-
-{:ok, d3} = DateTime.from_unix(1_552_356_584)
-{:ok, d4} = DateTime.from_unix(1_552_356_606)
-
-Repo.insert!(%TimeBlock{start: d3, stop: d4, task: t1})
+Repo.insert!(
+  %TimeBlock{
+    start_date: elem(Date.new(2019, 03, 12), 1),
+    start_time: elem(Time.new(4, 05, 10), 1),
+    stop_date: elem(Date.new(2019, 03, 12), 1),
+    stop_time: elem(Time.new(4, 20, 10), 1),
+    task: t1
+  }
+)

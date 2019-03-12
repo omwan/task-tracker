@@ -11,8 +11,12 @@ defmodule TaskTrackerWeb.TimeBlockView do
   end
 
   def render("time_block.json", %{time_block: time_block}) do
-    %{id: time_block.id,
-      start: time_block.start,
-      stop: time_block.stop}
+    %{
+      id: time_block.id,
+      start_date: time_block.start_date,
+      start_time: time_block.start_time,
+      stop_date: time_block.stop_date,
+      stop_time: time_block.stop_time
+    }
   end
 end

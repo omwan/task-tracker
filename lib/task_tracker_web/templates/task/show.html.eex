@@ -49,12 +49,27 @@
                 </thead>
                 <%= for time_block <- @task.time_blocks do %>
 
-                <tr>
-                    <td><%= time_block.start %></td>
-                    <td><%= time_block.stop %></td>
-                    <td>
+                <tr class="time-block-row form-container">
+                    <td class="form-group">
+                        <input class="form-control" type="date"
+                               value="<%= time_block.start_date %>"
+                               id="start-date-<%= time_block.id %>">
+                        <input class="form-control" type="time"
+                               value="<%= Time.truncate(time_block.start_time, :second) %>"
+                               id="start-time-<%= time_block.id %>">
+                    </td>
+                    <td class="form-group">
+                        <input class="form-control" type="date"
+                               value="<%= time_block.stop_date %>"
+                               id="stop-date-<%= time_block.id %>">
+                        <input class="form-control" type="time"
+                               value="<%= Time.truncate(time_block.stop_time, :second) %>"
+                               id="stop-time-<%= time_block.id %>">
+                    </td>
+                    <td class="form-group submit-buttons">
                         <span>
-                            <button class="btn btn-default btn-xs">Save</button>
+                            <button class="btn btn-primary btn-xs save-time-block-button"
+                                    data-time-block-id="<%= time_block.id %>">Save</button>
                         </span>
                         <span>
                             <%= link "Delete", to: time_block_path(@conn, :delete, time_block), method: :delete,
