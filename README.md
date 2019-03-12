@@ -10,7 +10,11 @@ Design choices made (HW07):
 * Only users with the "admin" flag set to "true" are considered managers and have underlings
 * A user is assigned a manager from the "edit user" screen
 * A task may have many one or more time blocks associated with it, each of which have a start and stop time
-* Time blocks are saved with date/time separately
+* Time blocks have a start date, start time, end date, and end time
+* Users may either manually create a new time block by entering their start date, start time, end date, and end time, or use the "start working" functionality to create a time block with the current time. 
+  * The user clicks the "start" button next to where it says "start working", and the current date/time will be displayed on the screen. When finished, they can click the "stop" button, which will display the current date/time as the stop time, and they can either click "clear" to clear the time block or click "save" to create a new time block. The user may also click "clear" at any time in the process to clear an in-progress time block, eg: after hitting start but before hitting stop.
+
+------
 
 Design choices made (HW06):
 
@@ -25,6 +29,8 @@ Design choices made (HW06):
 * Task description is not shown on index page listing all tasks, and only on show/details page for individual tasks
 * Task details including completion can only be set/edited from edit form
 * Relation b/w users and tasks is one to many where a task is assigned to a single user and a user may be assigned multiple tasks; the on-delete behavior is set to nilify, meaning if a user is deleted then any tasks assigned to them are instead set to "No user assigned". 
+
+------
 
 To start your Phoenix server:
 

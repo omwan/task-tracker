@@ -13,10 +13,22 @@ defmodule TaskTracker.TimeBlocks.TimeBlock do
     timestamps()
   end
 
+  def validate_stop_after_start(changeset) do
+    {:ok, start} = NaiveDateTime.new(get_field(changeset, :start_date), get_field(changeset, :start_time))
+    {:ok, stop} = NaiveDateTime.new(get_field(changeset, :stop_date), get_field(changeset, :stop_time))
+
+    if Date.compare(start, stop) == :gt do
+      add_error(changeset, :starts_on, "cannot be later than 'ends_on'")
+    else
+      changeset
+    end
+  end
+
   @doc false
   def changeset(time_block, attrs) do
     time_block
     |> cast(attrs, [:start_date, :start_time, :stop_date, :stop_time, :task_id])
     |> validate_required([:start_date, :start_time, :stop_date, :stop_time, :task_id])
+    |> validate_stop_after_start()
   end
 end
