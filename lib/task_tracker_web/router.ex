@@ -21,6 +21,8 @@ defmodule TaskTrackerWeb.Router do
     resources "/users", UserController
     resources "/tasks", TaskController
     resources "/sessions", SessionController, only: [:create, :delete], singleton: true
+    resources "/time_block", TimeBlockController, except: [:new, :edit]
+
   end
 
   # Other scopes may use custom stacks.

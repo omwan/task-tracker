@@ -7,34 +7,16 @@ defmodule TaskTracker.Tasks.Task do
     field :name, :string
     field :description, :string
     field :complete, :boolean
-    field :time_spent, :integer
     belongs_to :user, TaskTracker.Users.User
+    has_many :time_blocks, TaskTracker.TimeBlocks.TimeBlock
 
     timestamps()
   end
 
-  # referenced from
-  # https://medium.com/@QuantLayer/more-custom-validations-for-ecto-changesets-17f3641be2a0
-  defp validate_increment(changeset, field, increment) do
-    case changeset.valid? do
-      true ->
-        value = get_field(changeset, field)
-        case rem(value, increment) == 0 do
-          true -> changeset
-          _ -> add_error(changeset, :time_spent, "must be a multiple of #{increment}")
-        end
-      _ ->
-        changeset
-    end
-  end
-
-
   @doc false
   def changeset(task, attrs) do
     task
-    |> cast(attrs, [:name, :description, :time_spent, :complete, :user_id])
-    |> validate_required([:name, :complete, :time_spent])
-    |> validate_number(:time_spent, greater_than_or_equal_to: 0)
-    |> validate_increment(:time_spent, 15)
+    |> cast(attrs, [:name, :description, :complete, :user_id])
+    |> validate_required([:name, :complete])
   end
 end

@@ -18,11 +18,6 @@
     </li>
 
     <li>
-        <strong>Time spent:</strong>
-        <%= @task.time_spent %>
-    </li>
-
-    <li>
         <strong>Assignee:</strong>
         <%= if @task.user do %>
             <%= @task.user.username %>

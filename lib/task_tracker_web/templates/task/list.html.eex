@@ -3,7 +3,6 @@
     <tr>
         <th>Name</th>
         <th>Complete</th>
-        <th>Time spent</th>
         <th>Assignee</th>
         <th></th>
     </tr>
@@ -13,7 +12,6 @@
     <tr>
         <td><%= task.name %></td>
         <td><%= task.complete %></td>
-        <td><%= task.time_spent %></td>
         <%= if task.user do %>
         <td><%= task.user.username %></td>
         <% else %>
