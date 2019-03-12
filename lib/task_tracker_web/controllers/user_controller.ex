@@ -11,7 +11,9 @@ defmodule TaskTrackerWeb.UserController do
 
   def new(conn, _params) do
     changeset = Users.change_user(%User{})
-    render(conn, "new.html", changeset: changeset)
+    users = Users.list_users()
+            |> Enum.map(&{"#{&1.username}", &1.id})
+    render(conn, "new.html", users: users, changeset: changeset)
   end
 
   def create(conn, %{"user" => user_params}) do
@@ -33,7 +35,9 @@ defmodule TaskTrackerWeb.UserController do
   def edit(conn, %{"id" => id}) do
     user = Users.get_user(id)
     changeset = Users.change_user(user)
-    render(conn, "edit.html", user: user, changeset: changeset)
+    users = Users.list_users()
+            |> Enum.map(&{"#{&1.username}", &1.id})
+    render(conn, "edit.html", user: user, users: users, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
@@ -45,7 +49,9 @@ defmodule TaskTrackerWeb.UserController do
         |> put_flash(:info, "User updated successfully.")
         |> redirect(to: user_path(conn, :show, user))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", user: user, changeset: changeset)
+        users = Users.list_users()
+                |> Enum.map(&{"#{&1.username}", &1.id})
+        render(conn, "edit.html", user: user, users: users, changeset: changeset)
     end
   end
 

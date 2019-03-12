@@ -8,6 +8,8 @@ Design choices made (HW07):
 * A user may only have one manager, a manager may have multiple underlings
 * Users are not required to have a manager
 * Only users with the "admin" flag set to "true" are considered managers and have underlings
+* A user is assigned a manager from the "edit user" screen
+* A task may have many one or more time blocks associated with it, each of which have a start and stop time
 
 Design choices made (HW06):
 

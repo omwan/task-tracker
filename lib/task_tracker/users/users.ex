@@ -18,7 +18,8 @@ defmodule TaskTracker.Users do
 
   """
   def list_users do
-    Repo.all(User)
+    Repo.all from u in User,
+      preload: :manager
   end
 
   @doc """
@@ -51,7 +52,8 @@ defmodule TaskTracker.Users do
 
   def get_subordinates(id) do
     Repo.all from u in User,
-      where: u.manager_id == ^id
+      where: u.manager_id == ^id,
+      preload: :manager
   end
 
 

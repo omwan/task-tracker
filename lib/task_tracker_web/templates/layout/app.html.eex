@@ -19,17 +19,21 @@
 <body>
 <div class="container">
     <nav class="navbar navbar-expand-sm navbar-light bg-white">
-        <div class="col-4">
+        <div class="col-2">
             <a class="navbar-brand" href="/">Task Tracker</a>
         </div>
-        <div class="col-4">
+        <div class="col-6">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="/">Home</a>
                 </li>
+                <li class="nav-item">
+                    <%= link "All users", to: user_path(@conn, :index), class: "nav-link" %>
+                </li>
                 <%= if @current_user do %>
                 <li class="nav-item">
                     <%= link "My account", to: user_path(@conn, :show, @current_user), class: "nav-link" %>
+                </li>
                 <%= if @current_user.admin do %>
                 </li>
                     <%= link "Task report", to: task_path(@conn, :index), class: "nav-link" %>

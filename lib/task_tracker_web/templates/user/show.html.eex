@@ -1,38 +1,42 @@
-<!--<%= if @user do %>-->
-<h2>Account Details</h2>
-
-<ul>
-
-    <li>
-        <strong>Username:</strong>
-        <%= @user.username %>
-    </li>
-
-    <li>
-        <strong>Admin:</strong>
-        <%= @user.admin %>
-    </li>
-
-    <%= if @user.manager do %>
-    <li>
-        <strong>Manager:</strong>
-        <%= @user.manager.username %>
-    </li>
-    <% end %>
-
-</ul>
-
 <div class="row">
     <div class="col-md-12">
-        <%= render TaskTrackerWeb.UserView, "index.html",
-        Map.put(assigns, :users, TaskTracker.Users.get_subordinates(@user.id)) %>
+        <h2>Account Details</h2>
+
+        <ul>
+
+            <li>
+                <strong>Username:</strong>
+                <%= @user.username %>
+            </li>
+
+            <li>
+                <strong>Admin:</strong>
+                <%= @user.admin %>
+            </li>
+
+
+            <li>
+                <strong>Manager:</strong>
+                <%= if @user.manager do %>
+                <%= @user.manager.username %>
+                <% else %>
+                No manager assigned
+                <% end %>
+            </li>
+
+        </ul>
     </div>
 </div>
 
+<%= if Integer.to_string(@user.id) == Integer.to_string(@current_user.id) do %>
+<div class="row">
+    <div class="col-md-12">
+        <h2>My subordinates</h2>
+        <%= render TaskTrackerWeb.UserView, "list.html",
+        Map.put(assigns, :users, TaskTracker.Users.get_subordinates(@user.id)) %>
+    </div>
+</div>
+<% end %>
+
 <span><%= link "Edit", to: user_path(@conn, :edit, @user), class: "btn btn-primary" %></span>
 <span><%= link "Back", to: page_path(@conn, :index), class: "btn btn-default" %></span>
-<!--<% else %>-->
-<!--<div>-->
-    <!--Must be logged in to see your own account details.-->
-<!--</div>-->
-<!--<% end %>-->
