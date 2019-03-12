@@ -5,6 +5,8 @@ HW06/HW07 for CS 4550 Web Development
 Design choices made (HW07):
 
 * Managers may only assign tasks to their direct underlings, not the underlings of their underlings
+* Only the manager of the user assigned to a task may change who the task is assigned to; either to one of their underlings or to no one
+  * If a task is assigned to someone who is not a direct underling of the current logged in user, the current logged in user can only change fields of the task that are not the assignee.
 * A user may only have one manager, a manager may have multiple underlings
 * Users are not required to have a manager
 * Only users with the "admin" flag set to "true" are considered managers and have underlings

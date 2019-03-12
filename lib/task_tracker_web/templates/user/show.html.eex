@@ -28,10 +28,10 @@
     </div>
 </div>
 
-<%= if Integer.to_string(@user.id) == Integer.to_string(@current_user.id) do %>
+<%= if length(TaskTracker.Users.get_subordinates(@user.id)) > 0 do %>
 <div class="row">
     <div class="col-md-12">
-        <h2>My subordinates</h2>
+        <h2>Subordinates</h2>
         <%= render TaskTrackerWeb.UserView, "list.html",
         Map.put(assigns, :users, TaskTracker.Users.get_subordinates(@user.id)) %>
     </div>

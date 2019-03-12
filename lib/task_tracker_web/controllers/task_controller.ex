@@ -32,14 +32,27 @@ defmodule TaskTrackerWeb.TaskController do
     render(conn, "show.html", task: task)
   end
 
-  # referenced from
-  # https://til.hashrocket.com/posts/vikw0jg3hh-phoenix-select-form-helper
   def edit(conn, %{"id" => id}) do
     task = Tasks.get_task(id)
     changeset = Tasks.change_task(task)
-    users = Users.list_users()
-            |> Enum.map(&{"#{&1.username}", &1.id})
-    render(conn, "edit.html", task: task, users: users, changeset: changeset)
+
+    if (get_session(conn, :user_id)) do
+      subordinates = Users.get_subordinates(get_session(conn, :user_id))
+                     |> Enum.map(&{"#{&1.username}", &1.id})
+      if task.user do
+        if Enum.member?(subordinates, {task.user.username, task.user.id}) do
+          render(conn, "edit.html", task: task, users: subordinates, changeset: changeset)
+        else
+          render(conn, "edit.html", task: task, users: [], changeset: changeset)
+        end
+      else
+        render(conn, "edit.html", task: task, users: subordinates, changeset: changeset)
+      end
+    else
+      render(conn, "edit.html", task: task, users: [], changeset: changeset)
+    end
+
+
   end
 
   def update(conn, %{"id" => id, "task" => task_params}) do
