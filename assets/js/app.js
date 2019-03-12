@@ -29,7 +29,7 @@ $(function () {
 
     let timeBlockPath = "/ajax/time_block/";
 
-    let submitDisabled = function() {
+    let submitDisabled = function () {
         return $("#new-start-date").val() === "" ||
             $("#new-start-time").val() === "" ||
             $("#new-stop-date").val() === "" ||
@@ -40,8 +40,8 @@ $(function () {
         $(".new-time-block-button").prop("disabled", true);
     }
 
-    $(".new-time-block").find("input").each(function() {
-        $(this).change(function() {
+    $(".new-time-block").find("input").each(function () {
+        $(this).change(function () {
             if (submitDisabled()) {
                 $(".new-time-block-button").prop("disabled", true);
                 $(".manual-time-block-button").prop("disabled", false);
@@ -72,6 +72,10 @@ $(function () {
             }),
             success: function (response) {
                 console.log(response.data);
+            },
+            error: function (status, exception) {
+                let message = JSON.parse(status.responseText).errors.start_date;
+                alert("Error: " + message)
             }
         });
     };
@@ -172,6 +176,10 @@ $(function () {
                 });
 
                 clearOnClick();
+            },
+            error: function (status, exception) {
+                console.log(status);
+                console.log(exception);
             }
         });
     });
