@@ -10,6 +10,7 @@ Design choices made (HW07):
 * Only users with the "admin" flag set to "true" are considered managers and have underlings
 * A user is assigned a manager from the "edit user" screen
 * A task may have many one or more time blocks associated with it, each of which have a start and stop time
+* Time blocks are saved with date/time separately
 
 Design choices made (HW06):
 
