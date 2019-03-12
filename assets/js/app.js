@@ -36,7 +36,6 @@ $(function () {
             $("#new-stop-time").val() === "";
     };
 
-    console.log(submitDisabled());
     if (submitDisabled()) {
         $(".new-time-block-button").prop("disabled", true);
     }
@@ -45,8 +44,10 @@ $(function () {
         $(this).change(function() {
             if (submitDisabled()) {
                 $(".new-time-block-button").prop("disabled", true);
+                $(".manual-time-block-button").prop("disabled", false);
             } else {
                 $(".new-time-block-button").prop("disabled", false);
+                $(".manual-time-block-button").prop("disabled", true);
             }
         })
     });
@@ -100,8 +101,9 @@ $(function () {
             $(name).val("");
         });
         $(".new-time-block-button").prop("disabled", true);
+        $(".manual-time-block-button").text("Start working");
+        $(".manual-time-block-button").prop("disabled", false);
     };
-
 
     let newRow = '<tr class="time-block-row form-container">\n' +
         '                    <td class="form-group">\n' +
@@ -186,50 +188,28 @@ $(function () {
     let manualTimeBlock = {};
     $(".manual-time-block-button").click(function (event) {
         let button = $(this);
-        let taskId = $(this).data("task-id");
-        if (button.text() === "Start") {
+        if (button.text() === "Start working") {
             let start = getCurrentDateTime();
             manualTimeBlock["start_date"] = start.date;
             manualTimeBlock["start_time"] = start.time;
 
-            let startInfo = "<li>Start Date: {0}</li><li>Start Time: {1}</li>";
-            $(".manual-start").append(formatString(startInfo, [start.date, start.time]));
+            $("#new-start-date").val(start.date);
+            $("#new-start-time").val(start.time);
 
-            button.text("Stop");
-        } else if (button.text() === "Stop") {
+            button.text("Stop working");
+        } else if (button.text() === "Stop working") {
             let stop = getCurrentDateTime();
             manualTimeBlock["stop_date"] = stop.date;
             manualTimeBlock["stop_time"] = stop.time;
 
-            let stopInfo = "<li>Stop Date: {0}</li><li>Stop Time: {1}</li>";
-            $(".manual-stop").append(formatString(stopInfo, [stop.date, stop.time]));
+            $("#new-stop-date").val(stop.date);
+            $("#new-stop-time").val(stop.time);
 
-            button.text("Save");
-        } else {
-            manualTimeBlock["task_id"] = taskId;
-            $.ajax(timeBlockPath, {
-                method: "POST",
-                dataType: "json",
-                contentType: "application/json; charset=UTF-8",
-                data: JSON.stringify({"time_block": manualTimeBlock}),
-                success: function (response) {
-                    let data = response.data;
-                    $(".new-time-block").before(formatString(newRow, [data.start_date,
-                        data.id, data.start_time, data.stop_date, data.stop_time]));
+            button.text("Start working");
 
-                    button.text("Start");
-                    manualTimeBlock = {};
-                    $(".manual-start").text("");
-                    $(".manual-stop").text("");
-                }
-            });
+            $(".new-time-block-button").prop("disabled", false);
+            $(".manual-time-block-button").prop("disabled", true);
         }
     });
 
-    $(".clear-manual-time-block-button").click(function (event) {
-        $(".manual-time-block-button").text("Start");
-        $(".manual-start").text("");
-        $(".manual-stop").text("");
-        manualTimeBlock = {};
-    });
 });

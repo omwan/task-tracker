@@ -35,6 +35,13 @@
 
     <div class="row">
         <div class="col-md-12">
+            <span><%= link "Edit", to: task_path(@conn, :edit, @task), class: "btn btn-primary"%></span>
+            <span><%= link "Back", to: page_path(@conn, :index), class: "btn btn-default" %></span>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top:50px">
+        <div class="col-md-12">
             <h2>Time blocks</h2>
 
 
@@ -109,26 +116,15 @@
     </div>
 
     <div class="row">
-        <div class="control-label col-form-label col-md-2">
-            <label>Start working</label>
-        </div>
         <div class="col-md-2">
             <button class="btn btn-primary manual-time-block-button"
-                    data-task-id="<%= @task.id %>">Start</button>
-            <button class="btn btn-default clear-manual-time-block-button">Clear</button>
+                    data-task-id="<%= @task.id %>">Start working</button>
         </div>
         <div class="col-md-4">
             <ul class="manual-start"></ul>
         </div>
         <div class="col-md-4">
             <ul class="manual-stop"></ul>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12" style="margin-top:20px">
-            <span><%= link "Edit", to: task_path(@conn, :edit, @task), class: "btn btn-primary"%></span>
-            <span><%= link "Back", to: page_path(@conn, :index), class: "btn btn-default" %></span>
         </div>
     </div>
 
