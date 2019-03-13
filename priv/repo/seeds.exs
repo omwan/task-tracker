@@ -45,12 +45,46 @@ d = Repo.insert!(
   }
 )
 
+e = Repo.insert!(
+  %User{
+    username: "bob@example.com",
+    admin: false,
+    manager: b
+  }
+)
+
+f = Repo.insert!(
+  %User{
+    username: "charles@example.com",
+    admin: false,
+    manager: b
+  }
+)
+
 t1 = Repo.insert!(
   %Task{
     name: "homework",
     description: "assignment 8",
     complete: false,
     user: c
+  }
+)
+
+t2 = Repo.insert!(
+  %Task{
+    name: "cleaning",
+    description: "organize shelves",
+    complete: false,
+    user: c
+  }
+)
+
+t3 = Repo.insert!(
+  %Task{
+    name: "shopping",
+    description: "pick up groceries",
+    complete: false,
+    user: f
   }
 )
 
@@ -80,5 +114,15 @@ Repo.insert!(
     stop_date: elem(Date.new(2019, 03, 12), 1),
     stop_time: elem(Time.new(4, 20, 10), 1),
     task: t1
+  }
+)
+
+Repo.insert!(
+  %TimeBlock{
+    start_date: elem(Date.new(2019, 03, 12), 1),
+    start_time: elem(Time.new(4, 05, 10), 1),
+    stop_date: elem(Date.new(2019, 03, 12), 1),
+    stop_time: elem(Time.new(4, 20, 10), 1),
+    task: t3
   }
 )

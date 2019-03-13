@@ -13,6 +13,8 @@ Design choices made (HW07):
 * A user is assigned a manager from the "edit user" screen
 * A task may have many one or more time blocks associated with it, each of which have a start and stop time
 * Time blocks have a start date, start time, end date, and end time
+  * The start date and start time must occur before the end date and end time, eg: a vaid pair may have a start date/time of March 3 2019, 10:30am and an end date/time of March 3 2019, 10:45am
+  * This validation is performed in the backend, and error messages are rendered as an alert in the front end with the appropriate error message
 * Users may either manually create a new time block by entering their start date, start time, end date, and end time, or use the "start working" functionality to create a time block with the current time. 
   * The user clicks the "start" button next to where it says "start working", and the current date/time will be displayed on the screen. When finished, they can click the "stop" button, which will display the current date/time as the stop time, and they can either click "clear" to clear the time block or click "save" to create a new time block. The user may also click "clear" at any time in the process to clear an in-progress time block, eg: after hitting start but before hitting stop.
 
