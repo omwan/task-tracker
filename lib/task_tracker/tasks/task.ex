@@ -18,7 +18,8 @@ defmodule TaskTracker.Tasks.Task do
 
     if assignee_id do
       assignee = TaskTracker.Users.get_user!(assignee_id)
-      if assignee.manager_id == current_user do
+      task = TaskTracker.Tasks.get_task!(get_field(changeset, :id))
+      if task.user_id == assignee_id or assignee.manager_id == current_user do
         changeset
       else
         add_error(changeset, :assignee, "Task must be assigned to an underling")
