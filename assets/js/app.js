@@ -71,7 +71,7 @@ $(function () {
                 "time_block": timeBlock
             }),
             success: function (response) {
-                console.log(response.data);
+                alert("Time block successfully updated")
             },
             error: function (status, exception) {
                 let message = JSON.parse(status.responseText).errors.start_date;
@@ -178,8 +178,8 @@ $(function () {
                 clearOnClick();
             },
             error: function (status, exception) {
-                console.log(status);
-                console.log(exception);
+                let message = JSON.parse(status.responseText).errors.start_date;
+                alert("Error: " + message)
             }
         });
     });
