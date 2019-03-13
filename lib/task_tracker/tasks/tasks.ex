@@ -70,9 +70,9 @@ defmodule TaskTracker.Tasks do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_task(attrs \\ %{}) do
+  def create_task(attrs \\ %{}, current_user) do
     %Task{}
-    |> Task.changeset(attrs)
+    |> Task.changeset(attrs, current_user)
     |> Repo.insert()
   end
 
@@ -88,9 +88,9 @@ defmodule TaskTracker.Tasks do
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_task(%Task{} = task, attrs) do
+  def update_task(%Task{} = task, attrs, current_user) do
     task
-    |> Task.changeset(attrs)
+    |> Task.changeset(attrs, current_user)
     |> Repo.update()
   end
 
@@ -119,7 +119,7 @@ defmodule TaskTracker.Tasks do
       %Ecto.Changeset{source: %Task{}}
 
   """
-  def change_task(%Task{} = task) do
-    Task.changeset(task, %{})
+  def change_task(%Task{} = task, current_user) do
+    Task.changeset(task, %{}, current_user)
   end
 end

@@ -5,18 +5,21 @@ HW06/HW07 for CS 4550 Web Development
 Design choices made (HW07):
 
 * Managers may only assign tasks to their direct underlings, not the underlings of their underlings
+  * Validation performed in backend, enforced in frontend by only showing direct underlings of current user in assignee dropdown on task edit form
 * Only the manager of the user assigned to a task may change who the task is assigned to; either to one of their underlings or to no one
   * If a task is assigned to someone who is not a direct underling of the current logged in user, the current logged in user can only change fields of the task that are not the assignee.
 * A user may only have one manager, a manager may have multiple underlings
 * Users are not required to have a manager
-* Only users with the "admin" flag set to "true" are considered managers and have underlings
+* Only users with the "admin" flag set to "true" are considered managers and have underlings, and only users with the admin flag set to true can be set as someone else's manager
+  * Validation performed in backend, enforced in frontend by only showing managers in manager dropdown on user edit form
+* A user may be their own manager
 * A user is assigned a manager from the "edit user" screen
 * A task may have many one or more time blocks associated with it, each of which have a start and stop time
 * Time blocks have a start date, start time, end date, and end time
   * The start date and start time must occur before the end date and end time, eg: a vaid pair may have a start date/time of March 3 2019, 10:30am and an end date/time of March 3 2019, 10:45am
   * This validation is performed in the backend, and error messages are rendered as an alert in the front end with the appropriate error message
 * Users may either manually create a new time block by entering their start date, start time, end date, and end time, or use the "start working" functionality to create a time block with the current time. 
-  * The user clicks the "start" button next to where it says "start working", and the current date/time will be displayed on the screen. When finished, they can click the "stop" button, which will display the current date/time as the stop time, and they can either click "clear" to clear the time block or click "save" to create a new time block. The user may also click "clear" at any time in the process to clear an in-progress time block, eg: after hitting start but before hitting stop.
+  * The user clicks the "Start working" button, and the current date/time will populate the start time/date table cell in the last row. When finished, they can click the "Stop working" button, which will populate the current date/time in the stop date/time table cell, and they can either click "Clear" to clear the time block or click "Create new" to create a new time block. The user may also click "Clear" at any time in the process to clear an in-progress time block, such as after hitting start but before hitting stop.
 
 ------
 

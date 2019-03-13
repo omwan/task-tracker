@@ -10,14 +10,14 @@ defmodule TaskTrackerWeb.TaskController do
   end
 
   def new(conn, _params) do
-    changeset = Tasks.change_task(%Task{})
+    changeset = Tasks.change_task(%Task{}, get_session(conn, :user_id))
     users = Users.get_subordinates(get_session(conn, :user_id))
             |> Enum.map(&{"#{&1.username}", &1.id})
     render(conn, "new.html", users: users, changeset: changeset)
   end
 
   def create(conn, %{"task" => task_params}) do
-    case Tasks.create_task(task_params) do
+    case Tasks.create_task(task_params, get_session(conn, :user_id)) do
       {:ok, task} ->
         conn
         |> put_flash(:info, "Task created successfully.")
@@ -34,7 +34,7 @@ defmodule TaskTrackerWeb.TaskController do
 
   def edit(conn, %{"id" => id}) do
     task = Tasks.get_task(id)
-    changeset = Tasks.change_task(task)
+    changeset = Tasks.change_task(task, get_session(conn, :user_id))
 
     if (get_session(conn, :user_id)) do
       subordinates = Users.get_subordinates(get_session(conn, :user_id))
@@ -58,7 +58,7 @@ defmodule TaskTrackerWeb.TaskController do
   def update(conn, %{"id" => id, "task" => task_params}) do
     task = Tasks.get_task(id)
 
-    case Tasks.update_task(task, task_params) do
+    case Tasks.update_task(task, task_params, get_session(conn, :user_id)) do
       {:ok, task} ->
         conn
         |> put_flash(:info, "Task updated successfully.")

@@ -17,9 +17,6 @@ mix compile
 (cd assets && webpack --mode production)
 mix phx.digest
 
-mix ecto.create
-mix ecto.migrate
-
 echo "Generating release..."
 mix release
 
