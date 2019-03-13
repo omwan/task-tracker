@@ -22,6 +22,12 @@ defmodule TaskTracker.Users do
       preload: :manager
   end
 
+
+  def list_managers do
+    Repo.all from u in User,
+      where: u.admin == true
+  end
+
   @doc """
   Gets a single user.
 
