@@ -10,10 +10,15 @@ defmodule TaskTrackerWeb.TaskController do
   end
 
   def new(conn, _params) do
-    changeset = Tasks.change_task(%Task{}, get_session(conn, :user_id))
-    users = Users.get_subordinates(get_session(conn, :user_id))
+    current_user =  get_session(conn, :user_id)
+    changeset = Tasks.change_task(%Task{}, current_user)
+    if current_user != nil do
+      users = Users.get_subordinates(get_session(conn, :user_id))
             |> Enum.map(&{"#{&1.username}", &1.id})
-    render(conn, "new.html", users: users, changeset: changeset)
+      render(conn, "new.html", users: users, changeset: changeset)
+    else
+      render(conn, "new.html", users: [], changeset: changeset)
+    end
   end
 
   def create(conn, %{"task" => task_params}) do
@@ -23,7 +28,9 @@ defmodule TaskTrackerWeb.TaskController do
         |> put_flash(:info, "Task created successfully.")
         |> redirect(to: task_path(conn, :show, task))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        users = Users.get_subordinates(get_session(conn, :user_id))
+                |> Enum.map(&{"#{&1.username}", &1.id})
+        render(conn, "new.html", users: users, changeset: changeset)
     end
   end
 
@@ -39,20 +46,15 @@ defmodule TaskTrackerWeb.TaskController do
     if (get_session(conn, :user_id)) do
       subordinates = Users.get_subordinates(get_session(conn, :user_id))
                      |> Enum.map(&{"#{&1.username}", &1.id})
-      if task.user do
-        if Enum.member?(subordinates, {task.user.username, task.user.id}) do
-          render(conn, "edit.html", task: task, users: subordinates, changeset: changeset)
-        else
-          render(conn, "edit.html", task: task, users: [], changeset: changeset)
-        end
-      else
+      if (task.user != nil and Enum.member?(subordinates, {task.user.username, task.user.id}))
+         or task.user == nil do
         render(conn, "edit.html", task: task, users: subordinates, changeset: changeset)
+      else
+        render(conn, "edit.html", task: task, users: [], changeset: changeset)
       end
     else
       render(conn, "edit.html", task: task, users: [], changeset: changeset)
     end
-
-
   end
 
   def update(conn, %{"id" => id, "task" => task_params}) do
@@ -76,6 +78,6 @@ defmodule TaskTrackerWeb.TaskController do
 
     conn
     |> put_flash(:info, "Task deleted successfully.")
-    |> redirect(to: task_path(conn, :index))
+    |> redirect(to: page_path(conn, :index))
   end
 end
